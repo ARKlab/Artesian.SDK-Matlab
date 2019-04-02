@@ -1,0 +1,161 @@
+classdef VersionedQuery < Query
+    %VERSIONEDQUERY VersionedQuery class
+    properties (Access  = private)
+        partition IPartitionStrategy = DefaultPartitionStrategy
+    end
+    methods (Access = ?QueryService)
+        function obj = VersionedQuery(client, partition, policy)
+
+            obj@Query(client,VersionedQueryParameters());
+
+            if (nargin >= 2)
+                obj.partition = partition;
+            end
+            if (nargin >= 3)
+                obj.policy = policy;
+            end
+        end
+    end  
+    methods (Access = public)
+        function obj = WithTimeTransform(obj,tr)
+            obj.queryParamaters.TransformId = tr;
+        end
+        
+        function obj = InGranularity(obj,granularity)
+            obj.queryParamaters.Granularity = granularity;
+        end
+        function obj = ForLastNVersions(obj, lastN)
+            obj.queryParamaters.VersionSelectionType = VersionSelectionTypeEnum.LastN;
+            obj.queryParamaters.VersionSelectionConfig.LastN = lastN;
+        end
+        function obj = ForMUV(obj)
+            obj.queryParamaters.VersionSelectionType = VersionSelectionTypeEnum.MUV;
+        end
+        function obj = ForLastOfDays(obj, vstart, vend)
+            obj.queryParamaters.VersionSelectionType = VersionSelectionTypeEnum.LastOfDays;
+                       
+                obj.queryParamaters.VersionSelectionConfig.LastOf.Period = [];
+                obj.queryParamaters.VersionSelectionConfig.LastOf.PeriodFrom = [];
+                obj.queryParamaters.VersionSelectionConfig.LastOf.PeriodTo = [];
+                obj.queryParamaters.VersionSelectionConfig.LastOf.DateStart = [];
+                obj.queryParamaters.VersionSelectionConfig.LastOf.DateEnd = [];
+                
+            uff = char(vstart);
+            if nargin == 2
+                obj.queryParamaters.VersionSelectionConfig.LastOf.Period = vstart;
+            elseif uff(1) == 'P'
+                obj.queryParamaters.VersionSelectionConfig.LastOf.PeriodFrom = vstart;
+                obj.queryParamaters.VersionSelectionConfig.LastOf.PeriodTo = vend;
+            else                
+                obj.queryParamaters.VersionSelectionConfig.LastOf.DateStart = vstart;
+                obj.queryParamaters.VersionSelectionConfig.LastOf.DateEnd = vend;
+            end
+        end
+        function obj = ForLastOfMonths(obj, vstart, vend)
+            obj.queryParamaters.VersionSelectionType = VersionSelectionTypeEnum.LastOfMonths;
+                       
+                obj.queryParamaters.VersionSelectionConfig.LastOf.Period = [];
+                obj.queryParamaters.VersionSelectionConfig.LastOf.PeriodFrom = [];
+                obj.queryParamaters.VersionSelectionConfig.LastOf.PeriodTo = [];
+                obj.queryParamaters.VersionSelectionConfig.LastOf.DateStart = [];
+                obj.queryParamaters.VersionSelectionConfig.LastOf.DateEnd = [];
+                
+            uff = char(vstart);
+            if nargin == 2
+                obj.queryParamaters.VersionSelectionConfig.LastOf.Period = vstart;
+            elseif uff(1) == 'P'
+                obj.queryParamaters.VersionSelectionConfig.LastOf.PeriodFrom = vstart;
+                obj.queryParamaters.VersionSelectionConfig.LastOf.PeriodTo = vend;
+            else                
+                obj.queryParamaters.VersionSelectionConfig.LastOf.DateStart = vstart;
+                obj.queryParamaters.VersionSelectionConfig.LastOf.DateEnd = vend;
+            end
+        end
+        function obj = ForVersion(obj, version)
+            obj.queryParamaters.VersionSelectionType = VersionSelectionTypeEnum.Version;
+            obj.queryParamaters.VersionSelectionConfig.Version = version;
+        end
+        
+        function out=Execute(obj)
+            urlArray = obj.buildRequest();
+            out=obj.Exec(urlArray);
+        end
+    end
+    methods (Access = private)  
+          
+        function urlArray=buildRequest(obj)
+            obj.validateQuery();
+            qParams= obj.partition.PartitionVersioned([obj.queryParamaters]);
+            urlArray={};
+            for qParam = qParams
+                endUrl =  "/vts/" + obj.buildVersionRoute(qParam) + "/" + char(qParam.Granularity) + "/" + obj.buildExtractionRangeRoute(qParam) + "?_=1";
+                if(~isempty(qParam.Ids) )
+                    endUrl=endUrl+"&id="+urlencode(strjoin(string(qParam.Ids),','));
+                end
+                if(~isempty(qParam.FilterId) )
+                    endUrl=endUrl+"&filterId="+urlencode(string(qParam.FilterId));
+                end
+                if(~isempty(qParam.TimeZone) )
+                    endUrl=endUrl+"&tz="+urlencode(qParam.TimeZone);
+                end
+                if(~isempty(qParam.TransformId) )
+                    endUrl=endUrl+"&tr="+urlencode(string(qParam.TransformId));
+                end
+                urlArray = [urlArray,endUrl];
+            end
+        end
+        function subPath = buildLastOfSubRoute(obj, queryParamaters)
+           
+            if (~isempty(queryParamaters.VersionSelectionConfig.LastOf.DateStart) && ~isempty(queryParamaters.VersionSelectionConfig.LastOf.DateEnd))
+                subPath = "/" + obj.buildExtractionRangeVersionRoute(queryParamaters.VersionSelectionConfig.LastOf.DateStart, queryParamaters.VersionSelectionConfig.LastOf.DateEnd);
+            else
+                if (~isempty(queryParamaters.VersionSelectionConfig.LastOf.Period))
+                    subPath = "/" + queryParamaters.VersionSelectionConfig.LastOf.Period;
+                
+                else
+                    if (~isempty(queryParamaters.VersionSelectionConfig.LastOf.PeriodFrom) && ~isempty(queryParamaters.VersionSelectionConfig.LastOf.PeriodTo))
+                    subPath = "/" + obj.buildExtractionRangeVersionRoute(queryParamaters.VersionSelectionConfig.LastOf.PeriodFrom,queryParamaters.VersionSelectionConfig.LastOf.PeriodTo);
+                    else
+                        error("LastOf extraction type not defined");
+                    end
+                end
+            end
+
+            
+        end
+        
+        function subPath = buildExtractionRangeVersionRoute(obj, from, to)
+            subPath = from + "/" + to;
+        end
+        
+        function subPath = buildVersionRoute(obj, queryParamaters)
+            
+            subPath = char(queryParamaters.VersionSelectionType);
+            
+            switch queryParamaters.VersionSelectionType
+                case VersionSelectionTypeEnum.LastN
+                    subPath = "Last" + string(queryParamaters.VersionSelectionConfig.LastN);
+                case VersionSelectionTypeEnum.MUV
+                    % nothing                   
+                case { VersionSelectionTypeEnum.LastOfDays, VersionSelectionTypeEnum.LastOfMonths }
+                    subPath = subPath + obj.buildLastOfSubRoute(queryParamaters);
+                case VersionSelectionTypeEnum.Version
+                    subPath = subPath + "/" + queryParamaters.VersionSelectionConfig.Version;
+                otherwise
+                    error("Unsupported version type");
+            end
+        end
+    end
+    methods (Access = protected)  
+        function validateQuery(obj)
+            validateQuery@Query(obj);
+            if(isempty(obj.queryParamaters.Granularity))
+                error("Extraction granularity must be provided. Use .InGranularity() argument takes a granularity type")
+            end
+            if(isempty(obj.queryParamaters.VersionSelectionType))
+                error ("Version selection must be provided. Provide a version to query. eg .ForLastOfDays() arguments take a date range , period or period range");
+            end
+        end
+    end
+end
+

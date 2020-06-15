@@ -5,6 +5,9 @@ classdef DefaultPartitionStrategy < IPartitionStrategy
     end
     
     methods
+        function result = Partition(obj, queryParametersArray)
+            result= obj.idPartition(queryParametersArray);
+        end
         function result = PartitionActual(obj, actualQueryParametersArray)
             result= obj.idPartition(actualQueryParametersArray);
         end

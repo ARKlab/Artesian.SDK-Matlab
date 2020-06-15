@@ -33,6 +33,12 @@ classdef QueryService
             end
             marketAssessmentQuery = MasQuery(obj.client, partitionStrategy, obj.policy);
         end
+        function auctionQuery = CreateAuction(obj,partitionStrategy)
+             if (nargin == 1)
+                partitionStrategy=DefaultPartitionStrategy();
+            end
+            auctionQuery = AuctionQuery(obj.client, partitionStrategy, obj.policy);
+        end
     end
 end
 

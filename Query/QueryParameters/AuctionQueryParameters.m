@@ -1,0 +1,3 @@
+classdef AuctionQueryParameters < QueryParameters
+
+end

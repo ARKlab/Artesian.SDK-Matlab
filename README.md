@@ -91,6 +91,24 @@ To construct a Market Assessment Time Series the following must be provided.
 
 [Go to Time Extraction window section](#artesian-sdk-extraction-windows)
 
+## Auction Time Series
+
+```matlab
+qs = QueryService(cfg);
+
+data = qs.CreateAuction() ...
+  .ForMarketData([100000001]) ...
+  .InAbsoluteDateRange("2020-03-01", "2020-04-01") ...
+  .Execute();
+```
+
+To construct an Auction Time Series the following must be provided.
+
+| Auction Query          | Description                                                  |
+| ---------------------- | ------------------------------------------------------------ |
+| Market Data ID         | Provide a market data id or set of market data id's to query |
+| Time Extraction Window | An extraction time window for data to be queried             |
+
 ### Artesian SDK Extraction Windows
 Extraction window types  for queries.
 

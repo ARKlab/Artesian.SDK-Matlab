@@ -1,25 +1,32 @@
 ![image](http://www.ark-energy.eu/wp-content/uploads/ark-dark.png)
+
 # Artesian.SDK
 
 This Library provides read access to the Artesian API
 
 ## Getting Started
+
 ### Installation
+
 You can install the toolbox directly from the MatLab community [add-ons](https://www.mathworks.com/matlabcentral/fileexchange/71098-artesian-sdk).
 
-Alternatively, to install this package go to the [release page](https://github.com/ARKlab/Artesian.SDK-Matlab/releases) and download the **Artesian.SDK.mltbx** file and double click on it to 
+Alternatively, to install this package go to the [release page](https://github.com/ARKlab/Artesian.SDK-Matlab/releases) and download the **Artesian.SDK.mltbx** file and double click on it to
 install in Matlab.
 
 ## How to use
+
 The Artesian.SDK instance can be configured using API-Key authentication
+
 ```MATLAB
 cfg = ArtesianServiceConfig("https://fake-artesian-env/", "{api-key}");
 ```
 
 ## QueryService
+
 Using the ArtesianServiceConfig we create an instance of the QueryService which is used to create Actual, Versioned and Market Assessment time series queries
 
 ### Actual Time Series
+
 ```MATLAB
 qs = QueryService(cfg);
 data = qs.CreateActual() ...
@@ -30,7 +37,9 @@ data = qs.CreateActual() ...
        .Execute()
 
 ```
+
 To construct an Actual Time Series the following must be provided.
+
 <table>
   <tr><th>Actual Query</th><th>Description</th></tr>
   <tr><td>Market Data ID</td><td>Provide a market data id or set of market data id's to query</td></tr>
@@ -41,6 +50,7 @@ To construct an Actual Time Series the following must be provided.
 [Go to Time Extraction window section](#artesian-sdk-extraction-windows)
 
 ### Versioned Time Series
+
 ```MATLAB
 
 qs = QueryService(cfg);
@@ -61,7 +71,9 @@ q.ForLastOfMonths("P0Y-1M0D","P0Y1M0D").Execute()
 q.ForLastOfMonths("P0Y-1M0D").Execute()
 q.ForVersion("2019-03-12T14:30:00").Execute()
 ```
+
 To construct a Versioned Time Series the following must be provided.
+
 <table>
   <tr><th>Versioned Query</th><th>Description</th></tr>
   <tr><td>Market Data ID</td><td>Provide a market data id or set of market data id's to query</td></tr>
@@ -73,6 +85,7 @@ To construct a Versioned Time Series the following must be provided.
 [Go to Time Extraction window section](#artesian-sdk-extraction-windows)
 
 ### Market Assessment Time Series
+
 ```MATLAB
 qs = QueryService(cfg);
 data = qs.CreateMarketAssessment() ...
@@ -81,7 +94,9 @@ data = qs.CreateMarketAssessment() ...
        .InAbsoluteDateRange("2018-01-01","2018-01-02") ...
        .Execute()
 ```
+
 To construct a Market Assessment Time Series the following must be provided.
+
 <table>
   <tr><th>Mas Query</th><th>Description</th></tr>
   <tr><td>Market Data ID</td><td>Provide a market data id or set of market data id's to query</td></tr>
@@ -110,21 +125,29 @@ To construct an Auction Time Series the following must be provided.
 | Time Extraction Window | An extraction time window for data to be queried             |
 
 ### Artesian SDK Extraction Windows
-Extraction window types  for queries.
+
+Extraction window types for queries.
 
 Date Range
+
 ```MATLAB
  .InAbsoluteDateRange("2018-08-01", "2018-08-10")
 ```
+
 Relative Interval
+
 ```MATLAB
  .InRelativeInterval(RelativeIntervalEnum.RollingMonth)
 ```
+
 Period
+
 ```MATLAB
  .InRelativePeriod("P5D")
 ```
+
 Period Range
+
 ```MATLAB
  .InRelativePeriodRange("P-3D", "P10D")
 ```
@@ -140,14 +163,59 @@ mds = MarketDataService(cfg);
 ```
 
 To list MarketData curves
+
 ```MATLAB
 page = 1;
 pageSize = 100;
 res = mds.ReadCurveRange(100000004, page, pageSize);
 ```
 
+## GMEPublicOffer Service
+
+Using the ArtesianServiceConfig `cfg` we create an instance of the GMEPublicOfferService which is used to retrieve MarketData infos.
+
+```MATLAB
+
+gme = GMEPublicOfferService(cfg);
+
+```
+
+### GMEPublicOfferQuery
+
+Create a GMEPublicOfferQuery using the GMEPublicOfferService.
+
+```matlab
+gme.CreateGMEPublicOfferQuery() ...
+   .ForDate("2020-04-01") ...
+   .ForPurpose(Purpose.BID) ...
+   .ForStatus(Status.ACC) ...
+   .Execute()
+```
+
+#### GME Public Offer Required Filters
+
+| GME Public Offer Query | Description                                   |
+| ---------------------- | --------------------------------------------- |
+| ForDate                | Provide a date for extraction                 |
+| ForPurpose             | Provide a purpose (BID or OFF) for extraction |
+| ForStatus              | Provide a status for extraction               |
+
+#### GME Public Offer Optional Filters
+
+| GME Public Offer Query | Description                                          |
+| ---------------------- | ---------------------------------------------------- |
+| ForOperator            | Provide a list of Operators (string[])               |
+| ForUnit                | Provide a list of Units (string[])                   |
+| ForMarket              | Provide a list of Markets (Market[])                 |
+| ForScope               | Provide a list of Scopes (Scope[])                   |
+| ForBAType              | Provide a list of BATypes (BAType[])                 |
+| ForZone                | Provide a list of Zones (Zone[])                     |
+| ForUnitType            | Provide a list of UnitTypes (UnitType[])             |
+| ForGenerationType      | Provide a list of GenerationTypes (GenerationType[]) |
+| WithPagination         | Provide paging info (uint32 page, uint32 pageSize)   |
 
 ## Links
-* [Github](https://github.com/ARKlab/Artesian.SDK-Matlab)
-* [Ark Energy](http://www.ark-energy.eu/)
-* [Artesian Portal](https://portal.artesian.cloud)
+
+- [Github](https://github.com/ARKlab/Artesian.SDK-Matlab)
+- [Ark Energy](http://www.ark-energy.eu/)
+- [Artesian Portal](https://portal.artesian.cloud)

@@ -33,6 +33,17 @@ classdef ClientArtesian
             
            
         end
+
+        function data = ExecWrite(obj, method, url, input)
+            headers = {'Accept' 'application/json'; 'X-Api-Key' char(obj.apiKey); 'Accept-Encoding' 'gzip'};
+
+            option = weboptions('MediaType','application/json', 'ContentType', 'auto', 'Timeout', 60, 'RequestMethod', method, 'ArrayFormat', 'csv', 'UserAgent', 'Matlab Artesian.SDK/vSuk', ...
+                'HeaderFields', headers);
+
+            query = obj.baseurl + url;
+            data = webwrite(query, jsonencode(input), option);
+
+        end
        
     end
 end

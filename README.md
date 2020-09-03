@@ -8,7 +8,7 @@ This Library provides read access to the Artesian API
 
 ### Installation
 
-You can install the toolbox directly from the MatLab community [add-ons](https://www.mathworks.com/matlabcentral/fileexchange/71098-artesian-sdk).
+You can install the toolbox directly from the [![Matlab File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/71098-artesian-sdk).
 
 Alternatively, to install this package go to the [release page](https://github.com/ARKlab/Artesian.SDK-Matlab/releases) and download the **Artesian.SDK.mltbx** file and double click on it to
 install in Matlab.

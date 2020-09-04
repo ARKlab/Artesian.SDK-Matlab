@@ -27,7 +27,10 @@
 % example/.svn
 %
 % All files in a subfolder of the toolbox folder:
-Test/*
+Test/
+.git/
+.gitignore
+icon.png
 %
 % All files of a certain name in all subfolders of the toolbox folder:
 % **/.svn
@@ -41,9 +44,7 @@ Test/*
     <param.registered.apps />
     <param.docs />
     <param.getting.started.guide />
-    <param.matlabpath.excludes>
-      <item>/Test</item>
-    </param.matlabpath.excludes>
+    <param.matlabpath.excludes />
     <param.javaclasspath.excludes />
     <unset>
       <param.output />
@@ -57,18 +58,21 @@ Test/*
       <param.registered.apps />
       <param.docs />
       <param.getting.started.guide />
+      <param.matlabpath.excludes />
       <param.javaclasspath.excludes />
     </unset>
     <fileset.rootdir>
-      <file>C:\Users\ArkLabIta\Desktop\MatLab-ArtesianSDK</file>
+      <file>C:\GitRepo\Artesian.SDK-Matlab</file>
     </fileset.rootdir>
     <fileset.rootfiles>
-      <file>C:\Users\ArkLabIta\Desktop\MatLab-ArtesianSDK\Client</file>
-      <file>C:\Users\ArkLabIta\Desktop\MatLab-ArtesianSDK\Configuration</file>
-      <file>C:\Users\ArkLabIta\Desktop\MatLab-ArtesianSDK\MarketData</file>
-      <file>C:\Users\ArkLabIta\Desktop\MatLab-ArtesianSDK\Query</file>
-      <file>C:\Users\ArkLabIta\Desktop\MatLab-ArtesianSDK\Test</file>
-      <file>C:\Users\ArkLabIta\Desktop\MatLab-ArtesianSDK\Util</file>
+      <file>${PROJECT_ROOT}\Client</file>
+      <file>${PROJECT_ROOT}\Configuration</file>
+      <file>${PROJECT_ROOT}\GMEPublicOffer</file>
+      <file>${PROJECT_ROOT}\LICENSE</file>
+      <file>${PROJECT_ROOT}\MarketData</file>
+      <file>${PROJECT_ROOT}\Query</file>
+      <file>${PROJECT_ROOT}\README.md</file>
+      <file>${PROJECT_ROOT}\Util</file>
     </fileset.rootfiles>
     <fileset.depfun.included />
     <fileset.depfun.excluded />

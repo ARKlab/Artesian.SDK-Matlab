@@ -9,7 +9,7 @@
 - support for GME PublicOffer
 - support for Auctions</param.description>
     <param.screenshot>${PROJECT_ROOT}\icon.png</param.screenshot>
-    <param.version>1.1</param.version>
+    <param.version>1.1.1</param.version>
     <param.output>${PROJECT_ROOT}\Artesian.SDK.mltbx</param.output>
     <param.products.name />
     <param.products.id />

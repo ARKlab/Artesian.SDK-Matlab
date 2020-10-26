@@ -3,13 +3,17 @@ classdef ClientArtesian
     properties (Access = private)
         baseurl
         apiKey
+        sdkVersion 
     end
     
     methods
         function obj = ClientArtesian(config,url)
             obj.baseurl = config.BaseAddress + "/" + url;
             obj.apiKey = config.ApiKey;
+            obj.sdkVersion = ArtesianConstants.SDKVersion;
         end
+
+        
         function results = ExecCellVelues(obj, method, url)
             
             headers = {'Accept' 'application/x-msgpack'; 'X-Api-Key' char(obj.apiKey); 'Accept-Encoding' 'gzip'};
@@ -23,8 +27,8 @@ classdef ClientArtesian
         end
         function data = Exec(obj, method, url)
             
-            headers = {'Accept' 'application/json'; 'X-Api-Key' char(obj.apiKey); 'Accept-Encoding' 'gzip'};
-
+            headers = {'Accept' 'application/json'; 'X-Api-Key' char(obj.apiKey); 'Accept-Encoding' 'gzip'; 'X-Artesian-Agent' strcat('Matlab:',char(obj.sdkVersion))};
+            
             option  = weboptions('ContentType','auto','Timeout',60, 'RequestMethod', method, 'ArrayFormat', 'csv', 'UserAgent', 'Matlab Artesian.SDK/vSuk', ...
                 'HeaderFields',headers);
 

@@ -17,6 +17,9 @@ classdef DefaultPartitionStrategy < IPartitionStrategy
         function result = PartitionMas(obj, masQueryParametersArray)
             result= obj.idPartition(masQueryParametersArray);
         end
+        function result = PartitionBidAsk(obj, bidAskQueryParametersArray)
+            result= obj.idPartition(bidAskQueryParametersArray);
+        end
     end
     methods (Access = private)
         function result = idPartition(obj, parameters)

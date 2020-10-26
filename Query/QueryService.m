@@ -39,6 +39,12 @@ classdef QueryService
             end
             auctionQuery = AuctionQuery(obj.client, partitionStrategy, obj.policy);
         end
+        function bidAskQuery = CreateBidAsk(obj,partitionStrategy)
+             if (nargin == 1)
+                partitionStrategy=DefaultPartitionStrategy();
+            end
+            bidAskQuery = BidAskQuery(obj.client, partitionStrategy, obj.policy);
+        end
     end
 end
 

@@ -8,6 +8,7 @@ classdef (Abstract) IPartitionStrategy
         
         masQueryParametersArray = PartitionMas(obj, masQueryParametersArray)
         
+        bidAskQueryParametersArray = PartitionBidAsk(obj, bidAskQueryParametersArray)
     end
 end
 

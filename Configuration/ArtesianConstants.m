@@ -6,7 +6,6 @@ classdef (Abstract) ArtesianConstants
         MetadataVersion =  "v2.1";
         GMEPublicOfferRoute = "gmepublicoffer"
         GMEPublicOfferVersion = "v1.0"
-        SDKVersion = "1.1.1"
     end
     
 end

@@ -3,12 +3,14 @@ classdef ClientArtesian
     properties (Access = private)
         baseurl
         apiKey
+        sdkVersion 
     end
     
     methods
         function obj = ClientArtesian(config,url)
             obj.baseurl = config.BaseAddress + "/" + url;
             obj.apiKey = config.ApiKey;
+            obj.sdkVersion = ArtesianConstants.SDKVersion;
         end
 
         
@@ -25,17 +27,22 @@ classdef ClientArtesian
         end
         function data = Exec(obj, method, url)
             
+            sprintf(version)
+            
+            sprintf( char(version('-java')))
+                        
             toolboxFile = 'Artesian.SDK.prj'
-            currentVersion = matlab.addons.toolbox.toolboxVersion(toolboxFile)
+            currentVersion = matlab.addons.toolbox.toolboxVersion(toolboxFile) 
+sprintf(currentVersion)
+
+            headers = {'Accept' 'application/json'; 'X-Api-Key' char(obj.apiKey); 'Accept-Encoding' 'gzip'; 
+                'X-Artesian-Agent' strcat('Matlab:',char(obj.sdkVersion),'Version', char(version),'JavaVM', char(version('-java')))};
             
-            headers = {'Accept' 'application/json'; 'X-Api-Key' char(obj.apiKey); 'Accept-Encoding' 'gzip';
-                'X-Artesian-Agent' strcat('Matlab:',char(currentVersion),',Version:', char(version),',JavaVM:', char(version('-java')))};
-            
-            sprintf(strcat('Matlab:',char(currentVersion),', Version:', char(version),', JavaVM:', char(version('-java'))))
+            sprintf
             
             option  = weboptions('ContentType','auto','Timeout',60, 'RequestMethod', method, 'ArrayFormat', 'csv', 'UserAgent', 'Matlab Artesian.SDK/vSuk', ...
                 'HeaderFields',headers);
-            
+
             query = obj.baseurl + url
             data= webread(query,option);
             

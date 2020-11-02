@@ -7,7 +7,7 @@
     <param.summary>This Library provides read access to the Artesian API</param.summary>
     <param.description>In v1.2.0 has been added:
 - support for BidAsk
-- Custom Header</param.description>
+- Custom Header with versions</param.description>
     <param.screenshot>${PROJECT_ROOT}\icon.png</param.screenshot>
     <param.version>1.2.0</param.version>
     <param.output>${PROJECT_ROOT}\Artesian.SDK.mltbx</param.output>

@@ -34,7 +34,7 @@ classdef ClientArtesian
             end
             
             headers = {'Accept' 'application/json'; 'X-Api-Key' char(obj.apiKey); 'Accept-Encoding' 'gzip';
-                'X-Artesian-Agent' strcat('Matlab:',char(currentSdkVersion),',Version:', char(version),',JavaVM:', char(version('-java')))};
+                'X-Artesian-Agent' strcat('ArtesianSDK-Matlab:',char(currentSdkVersion),',Version:', char(version),',JavaVM:', char(version('-java')))};
             
             %sprintf(strcat('Matlab:',char(currentSdkVersion),', Version:', char(version),', JavaVM:', char(version('-java'))))
             

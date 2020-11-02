@@ -29,7 +29,7 @@ classdef ClientArtesian
             T = struct2table(toolboxes);
             rows = (T.Name=="Artesian.SDK");
             currentSdkVersion = 'debugMode';
-            if(rows(1))
+            if(ismember(1, rows))
                 currentSdkVersion = char(T(rows,:).Version);
             end
             

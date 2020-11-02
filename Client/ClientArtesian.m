@@ -25,13 +25,18 @@ classdef ClientArtesian
         end
         function data = Exec(obj, method, url)
             
-            toolboxFile = 'Artesian.SDK.prj'
-            currentVersion = matlab.addons.toolbox.toolboxVersion(toolboxFile)
+            toolboxes = matlab.addons.toolbox.installedToolboxes;
+            T = struct2table(toolboxes);
+            rows = (T.Name=="Artesian.SDK");
+            currentSdkVersion = 'debugMode';
+            if(rows(1))
+                currentSdkVersion = char(T(rows,:).Version);
+            end
             
             headers = {'Accept' 'application/json'; 'X-Api-Key' char(obj.apiKey); 'Accept-Encoding' 'gzip';
-                'X-Artesian-Agent' strcat('Matlab:',char(currentVersion),',Version:', char(version),',JavaVM:', char(version('-java')))};
+                'X-Artesian-Agent' strcat('Matlab:',char(currentSdkVersion),',Version:', char(version),',JavaVM:', char(version('-java')))};
             
-            sprintf(strcat('Matlab:',char(currentVersion),', Version:', char(version),', JavaVM:', char(version('-java'))))
+            %sprintf(strcat('Matlab:',char(currentSdkVersion),', Version:', char(version),', JavaVM:', char(version('-java'))))
             
             option  = weboptions('ContentType','auto','Timeout',60, 'RequestMethod', method, 'ArrayFormat', 'csv', 'UserAgent', 'Matlab Artesian.SDK/vSuk', ...
                 'HeaderFields',headers);

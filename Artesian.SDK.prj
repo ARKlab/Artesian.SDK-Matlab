@@ -1,15 +1,15 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration file="C:\GitRepo\Artesian.SDK-Matlab\Artesian.SDK.prj" location="C:\GitRepo\Artesian.SDK-Matlab" name="Artesian.SDK" target="target.toolbox" target-name="Package Toolbox">
+  <configuration file="C:\Git\Artesian.SDK-Matlab\Artesian.SDK.prj" location="C:\Git\Artesian.SDK-Matlab" name="Artesian.SDK" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>Artesian.SDK</param.appname>
     <param.authnamewatermark>Niccolo Cecchi</param.authnamewatermark>
     <param.email>niccolo.cecchi@ark-energy.eu</param.email>
     <param.company>Ark Energy</param.company>
     <param.summary>This Library provides read access to the Artesian API</param.summary>
-    <param.description>In v1.1.0 has been added:
-- support for GME PublicOffer
-- support for Auctions</param.description>
+    <param.description>In v1.2.0 has been added:
+- support for BidAsk
+- Custom Header</param.description>
     <param.screenshot>${PROJECT_ROOT}\icon.png</param.screenshot>
-    <param.version>1.1.1</param.version>
+    <param.version>1.2.0</param.version>
     <param.output>${PROJECT_ROOT}\Artesian.SDK.mltbx</param.output>
     <param.products.name />
     <param.products.id />
@@ -38,6 +38,7 @@ icon.png
 % All files matching a pattern in all subfolders of the toolbox folder:
 % **/*.bak
 %</param.exclude.filters>
+    <param.exclude.pcodedmfiles>true</param.exclude.pcodedmfiles>
     <param.examples />
     <param.demosxml />
     <param.apps />
@@ -46,12 +47,27 @@ icon.png
     <param.getting.started.guide />
     <param.matlabpath.excludes />
     <param.javaclasspath.excludes />
+    <param.exported.on.package>false</param.exported.on.package>
+    <param.release.start />
+    <param.release.end />
+    <param.release.current.only>false</param.release.current.only>
+    <param.compatiblity.windows>true</param.compatiblity.windows>
+    <param.compatiblity.macos>true</param.compatiblity.macos>
+    <param.compatiblity.linux>true</param.compatiblity.linux>
+    <param.compatiblity.matlabonline>true</param.compatiblity.matlabonline>
+    <param.installation.map />
+    <param.additional.sw.names />
+    <param.additional.sw.licenses />
+    <param.additional.sw.win.url />
+    <param.additional.sw.mac.url />
+    <param.additional.sw.linux.url />
     <unset>
       <param.output />
       <param.products.name />
       <param.products.id />
       <param.products.version />
       <param.platforms />
+      <param.exclude.pcodedmfiles />
       <param.examples />
       <param.demosxml />
       <param.apps />
@@ -60,9 +76,23 @@ icon.png
       <param.getting.started.guide />
       <param.matlabpath.excludes />
       <param.javaclasspath.excludes />
+      <param.exported.on.package />
+      <param.release.start />
+      <param.release.end />
+      <param.release.current.only />
+      <param.compatiblity.windows />
+      <param.compatiblity.macos />
+      <param.compatiblity.linux />
+      <param.compatiblity.matlabonline />
+      <param.installation.map />
+      <param.additional.sw.names />
+      <param.additional.sw.licenses />
+      <param.additional.sw.win.url />
+      <param.additional.sw.mac.url />
+      <param.additional.sw.linux.url />
     </unset>
     <fileset.rootdir>
-      <file>C:\GitRepo\Artesian.SDK-Matlab</file>
+      <file>C:\Git\Artesian.SDK-Matlab</file>
     </fileset.rootdir>
     <fileset.rootfiles>
       <file>${PROJECT_ROOT}\Client</file>
@@ -78,11 +108,11 @@ icon.png
     <fileset.depfun.excluded />
     <fileset.package />
     <build-deliverables>
-      <file location="C:\GitRepo\Artesian.SDK-Matlab" name="Artesian.SDK.mltbx" optional="false">C:\GitRepo\Artesian.SDK-Matlab\Artesian.SDK.mltbx</file>
+      <file location="C:\Git\Artesian.SDK-Matlab" name="Artesian.SDK.mltbx" optional="false">C:\Git\Artesian.SDK-Matlab\Artesian.SDK.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2017b</root>
+      <root>C:\Program Files\MATLAB\R2018b</root>
       <toolboxes />
     </matlab>
     <platform>

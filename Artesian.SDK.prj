@@ -1,12 +1,12 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration file="C:\Git\Artesian.SDK-Matlab\Artesian.SDK.prj" location="C:\Git\Artesian.SDK-Matlab" name="Artesian.SDK" target="target.toolbox" target-name="Package Toolbox">
+  <configuration build-checksum="406430653" file="C:\Git\Artesian.SDK-Matlab\Artesian.SDK.prj" location="C:\Git\Artesian.SDK-Matlab" name="Artesian.SDK" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>Artesian.SDK</param.appname>
     <param.authnamewatermark>Niccolo Cecchi</param.authnamewatermark>
     <param.email>niccolo.cecchi@ark-energy.eu</param.email>
     <param.company>Ark Energy</param.company>
     <param.summary>This Library provides read access to the Artesian API</param.summary>
     <param.description>In v1.3.0 has been added:
-- Extraction Fill</param.description>
+- Extraction Fill for all queries</param.description>
     <param.screenshot>${PROJECT_ROOT}\icon.png</param.screenshot>
     <param.version>1.3.0</param.version>
     <param.output>${PROJECT_ROOT}\Artesian.SDK.mltbx</param.output>

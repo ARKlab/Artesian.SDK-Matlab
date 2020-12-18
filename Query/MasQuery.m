@@ -20,6 +20,23 @@ classdef MasQuery < Query
         function obj = ForProducts(obj,products)
             obj.queryParamaters.Products = products;
         end 
+        
+        %FILLER
+        function obj = WithFillNull(obj)
+            obj.queryParamaters.FillerKindType = FillerKindTypeEnum.Null;
+        end
+        function obj = WithFillCustomValue(obj, value)
+            obj.queryParamaters.FillerKindType = FillerKindTypeEnum.CustomValue;
+            obj.queryParamaters.FillerConfig.FillerMasDV = value;
+        end
+        function obj = WithFillLatestValue(obj, period)
+            obj.queryParamaters.FillerKindType = FillerKindTypeEnum.LatestValidValue;
+            obj.queryParamaters.FillerConfig.FillerPeriod = period;
+        end
+        function obj = WithFillNone(obj)
+            obj.queryParamaters.FillerKindType = FillerKindTypeEnum.NoFill;
+        end
+        
         function out=Execute(obj)
             urlArray = obj.buildRequest();
             out=obj.Exec(urlArray);
@@ -44,6 +61,38 @@ classdef MasQuery < Query
                 end
                 if(~isempty(qParam.Products) )
                     endUrl=endUrl+"&p="+urlencode(strjoin(string(qParam.Products),','));
+                end
+                if(~isempty(qParam.FillerKindType) )
+                    endUrl=endUrl+"&fillerK="+urlencode(string(qParam.FillerKindType));
+                end
+                if(qParam.FillerKindType ~= FillerKindTypeEnum.Default)
+                    if(~isempty(qParam.FillerConfig.FillerMasDV.Settlement) )
+                        endUrl=endUrl+"&fillerDVs="+urlencode(string(qParam.FillerConfig.FillerMasDV.Settlement));
+                    end
+                    if(~isempty(qParam.FillerConfig.FillerMasDV.Open) )
+                        endUrl=endUrl+"&fillerDVo="+urlencode(string(qParam.FillerConfig.FillerMasDV.Open));
+                    end
+                    if(~isempty(qParam.FillerConfig.FillerMasDV.Close) )
+                        endUrl=endUrl+"&fillerDVc="+urlencode(string(qParam.FillerConfig.FillerMasDV.Close));
+                    end
+                    if(~isempty(qParam.FillerConfig.FillerMasDV.High) )
+                        endUrl=endUrl+"&fillerDVh="+urlencode(string(qParam.FillerConfig.FillerMasDV.High));
+                    end
+                    if(~isempty(qParam.FillerConfig.FillerMasDV.Low) )
+                        endUrl=endUrl+"&fillerDVl="+urlencode(string(qParam.FillerConfig.FillerMasDV.Low));
+                    end
+                    if(~isempty(qParam.FillerConfig.FillerMasDV.VolumePaid) )
+                        endUrl=endUrl+"&fillerDVvp="+urlencode(string(qParam.FillerConfig.FillerMasDV.VolumePaid));
+                    end
+                    if(~isempty(qParam.FillerConfig.FillerMasDV.VolumeGiven) )
+                        endUrl=endUrl+"&fillerDVvg="+urlencode(string(qParam.FillerConfig.FillerMasDV.VolumeGiven));
+                    end
+                    if(~isempty(qParam.FillerConfig.FillerMasDV.Volume) )
+                        endUrl=endUrl+"&fillerDVvt="+urlencode(string(qParam.FillerConfig.FillerMasDV.Volume));
+                    end
+                    if(~isempty(qParam.FillerConfig.FillerPeriod) )
+                        endUrl=endUrl+"&fillerP="+urlencode(string(qParam.FillerConfig.FillerPeriod));
+                    end
                 end
                 urlArray = [urlArray,endUrl];
             end

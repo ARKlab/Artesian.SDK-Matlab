@@ -1,4 +1,4 @@
-classdef BidAskQueryParameters < QueryParameters
+classdef BidAskQueryParameters < QueryParametersWithFill
     %BidAskQueryParameters BidAsk Query Paramaters DTO
     
     properties
@@ -6,17 +6,22 @@ classdef BidAskQueryParameters < QueryParameters
     end
     
     methods
-        function obj = BidAskQueryParameters(ids,extractionRangeSelectionConfig,extractionRangeType,timezone,filterId, ...
+        function obj = BidAskQueryParameters(ids,extractionRangeSelectionConfig,extractionRangeType,timezone,filterId,fillerConfig,fillerKindType, ...
                 products)
+            
              if (nargin == 0)
                 ids = [];
                 extractionRangeSelectionConfig = [];
                 extractionRangeType = [];
                 timezone = [];
                 filterId = [];
+                fillerConfig = [];
+                fillerKindType = [];
                 products = [];
-            end
-            obj@QueryParameters(ids, extractionRangeSelectionConfig, extractionRangeType,timezone,filterId);
+             end
+            
+            obj@QueryParametersWithFill(ids, extractionRangeSelectionConfig, extractionRangeType,timezone,filterId,fillerConfig,fillerKindType);
+            
             obj.Products = products;
         end
     end

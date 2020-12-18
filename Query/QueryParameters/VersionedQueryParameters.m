@@ -1,4 +1,4 @@
-classdef VersionedQueryParameters < QueryParameters
+classdef VersionedQueryParameters < QueryParametersWithFill
     %VersionedQueryParameters Versioned Query Paramaters DTO
     
     properties
@@ -9,7 +9,7 @@ classdef VersionedQueryParameters < QueryParameters
     end
     
     methods
-        function obj = VersionedQueryParameters(ids,extractionRangeSelectionConfig,extractionRangeType,timezone,filterId, ...
+        function obj = VersionedQueryParameters(ids,extractionRangeSelectionConfig,extractionRangeType,timezone,filterId,fillerConfig,fillerKindType, ...
                 granularity, transformId, versionSelectionConfig, versionSelectionType)
             if (nargin == 0)
                 ids = [];
@@ -17,13 +17,16 @@ classdef VersionedQueryParameters < QueryParameters
                 extractionRangeType = [];
                 timezone = [];
                 filterId = [];
+                fillerConfig = [];
+                fillerKindType = [];
                 granularity = [];
                 transformId = [];
                 versionSelectionConfig = [];
                 versionSelectionType =[];
             end
             
-            obj@QueryParameters(ids, extractionRangeSelectionConfig, extractionRangeType,timezone,filterId);
+            obj@QueryParametersWithFill(ids, extractionRangeSelectionConfig, extractionRangeType,timezone,filterId,fillerConfig,fillerKindType);
+            
             obj.VersionSelectionConfig = versionSelectionConfig;
             obj.VersionSelectionType = versionSelectionType;
             obj.Granularity = granularity;

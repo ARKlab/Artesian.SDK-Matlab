@@ -20,6 +20,23 @@ classdef BidAskQuery < Query
         function obj = ForProducts(obj,products)
             obj.queryParamaters.Products = products;
         end 
+        
+        %FILLER
+        function obj = WithFillNull(obj)
+            obj.queryParamaters.FillerKindType = FillerKindTypeEnum.Null;
+        end
+        function obj = WithFillCustomValue(obj, value)
+            obj.queryParamaters.FillerKindType = FillerKindTypeEnum.CustomValue;
+            obj.queryParamaters.FillerConfig.FillerBidAskDV = value;
+        end
+        function obj = WithFillLatestValue(obj, period)
+            obj.queryParamaters.FillerKindType = FillerKindTypeEnum.LatestValidValue;
+            obj.queryParamaters.FillerConfig.FillerPeriod = period;
+        end
+        function obj = WithFillNone(obj)
+            obj.queryParamaters.FillerKindType = FillerKindTypeEnum.NoFill;
+        end
+        
         function out=Execute(obj)
             urlArray = obj.buildRequest();
             out=obj.Exec(urlArray);
@@ -44,6 +61,32 @@ classdef BidAskQuery < Query
                 end
                 if(~isempty(qParam.Products) )
                     endUrl=endUrl+"&p="+urlencode(strjoin(string(qParam.Products),','));
+                end
+                if(~isempty(qParam.FillerKindType) )
+                    endUrl=endUrl+"&fillerK="+urlencode(string(qParam.FillerKindType));
+                end
+                if(qParam.FillerKindType ~= FillerKindTypeEnum.Default)
+                    if(~isempty(qParam.FillerConfig.FillerBidAskDV.BestBidPrice) )
+                        endUrl=endUrl+"&fillerDVbbp="+urlencode(string(qParam.FillerConfig.FillerBidAskDV.BestBidPrice));
+                    end
+                    if(~isempty(qParam.FillerConfig.FillerBidAskDV.BestAskPrice) )
+                        endUrl=endUrl+"&fillerDVbap="+urlencode(string(qParam.FillerConfig.FillerBidAskDV.BestAskPrice));
+                    end
+                    if(~isempty(qParam.FillerConfig.FillerBidAskDV.BestBidQuantity) )
+                        endUrl=endUrl+"&fillerDVbbq="+urlencode(string(qParam.FillerConfig.FillerBidAskDV.BestBidQuantity));
+                    end
+                    if(~isempty(qParam.FillerConfig.FillerBidAskDV.BestAskQuantity) )
+                        endUrl=endUrl+"&fillerDVbaq="+urlencode(string(qParam.FillerConfig.FillerBidAskDV.BestAskQuantity));
+                    end
+                    if(~isempty(qParam.FillerConfig.FillerBidAskDV.LastPrice) )
+                        endUrl=endUrl+"&fillerDVlp="+urlencode(string(qParam.FillerConfig.FillerBidAskDV.LastPrice));
+                    end
+                    if(~isempty(qParam.FillerConfig.FillerBidAskDV.LastQuantity) )
+                        endUrl=endUrl+"&fillerDVlq="+urlencode(string(qParam.FillerConfig.FillerBidAskDV.LastQuantity));
+                    end
+                    if(~isempty(qParam.FillerConfig.FillerPeriod) )
+                        endUrl=endUrl+"&fillerP="+urlencode(string(qParam.FillerConfig.FillerPeriod));
+                    end
                 end
                 urlArray = [urlArray,endUrl];
             end

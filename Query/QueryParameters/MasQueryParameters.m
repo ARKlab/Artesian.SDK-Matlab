@@ -1,4 +1,4 @@
-classdef MasQueryParameters < QueryParameters
+classdef MasQueryParameters < QueryParametersWithFill
     %MasQueryParameters Market Assessment Query Paramaters DTO
     
     properties
@@ -6,7 +6,7 @@ classdef MasQueryParameters < QueryParameters
     end
     
     methods
-        function obj = MasQueryParameters(ids,extractionRangeSelectionConfig,extractionRangeType,timezone,filterId, ...
+        function obj = MasQueryParameters(ids,extractionRangeSelectionConfig,extractionRangeType,timezone,filterId,fillerConfig,fillerKindType, ...
                 products)
              if (nargin == 0)
                 ids = [];
@@ -14,9 +14,13 @@ classdef MasQueryParameters < QueryParameters
                 extractionRangeType = [];
                 timezone = [];
                 filterId = [];
+                fillerConfig = [];
+                fillerKindType = [];
                 products = [];
-            end
-            obj@QueryParameters(ids, extractionRangeSelectionConfig, extractionRangeType,timezone,filterId);
+             end
+            
+            obj@QueryParametersWithFill(ids, extractionRangeSelectionConfig, extractionRangeType,timezone,filterId,fillerConfig,fillerKindType);
+            
             obj.Products = products;
         end
     end

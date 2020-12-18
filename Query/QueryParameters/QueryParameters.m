@@ -4,7 +4,7 @@ classdef (Abstract) QueryParameters
     properties
         Ids
         ExtractionRangeSelectionConfig
-        ExtractionRangeType
+        ExtractionRangeType 
         TimeZone
         FilterId
     end
@@ -25,7 +25,6 @@ classdef (Abstract) QueryParameters
             obj.ExtractionRangeType = extractionRangeType;
             obj.TimeZone = timeZone;
             obj.FilterId = filterId;
-
         end
     end
 end

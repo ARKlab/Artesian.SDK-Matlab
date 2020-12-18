@@ -25,6 +25,22 @@ classdef ActualQuery < Query
             obj.queryParamaters.Granularity = granularity;
         end
         
+        %FILLER
+        function obj = WithFillNull(obj)
+            obj.queryParamaters.FillerKindType = FillerKindTypeEnum.Null;
+        end
+        function obj = WithFillCustomValue(obj, value)
+            obj.queryParamaters.FillerKindType = FillerKindTypeEnum.CustomValue;
+            obj.queryParamaters.FillerConfig.FillerTimeSeriesDV = value;
+        end
+        function obj = WithFillLatestValue(obj, period)
+            obj.queryParamaters.FillerKindType = FillerKindTypeEnum.LatestValidValue;
+            obj.queryParamaters.FillerConfig.FillerPeriod = period;
+        end
+        function obj = WithFillNone(obj)
+            obj.queryParamaters.FillerKindType = FillerKindTypeEnum.NoFill;
+        end
+        
         function out=Execute(obj)
             urlArray = obj.buildRequest();
             out=obj.Exec(urlArray);
@@ -49,6 +65,17 @@ classdef ActualQuery < Query
                 end
                 if(~isempty(qParam.TransformId) )
                     endUrl=endUrl+"&tr="+urlencode(string(qParam.TransformId));
+                end
+                if(~isempty(qParam.FillerKindType) )
+                    endUrl=endUrl+"&fillerK="+urlencode(string(qParam.FillerKindType));
+                end
+                if(qParam.FillerKindType ~= FillerKindTypeEnum.Default)
+                    if(~isempty(qParam.FillerConfig.FillerTimeSeriesDV) )
+                        endUrl=endUrl+"&FillerDV="+urlencode(string(qParam.FillerConfig.FillerTimeSeriesDV));
+                    end
+                    if(~isempty(qParam.FillerConfig.FillerPeriod) )
+                        endUrl=endUrl+"&fillerP="+urlencode(string(qParam.FillerConfig.FillerPeriod));
+                    end
                 end
                 urlArray = [urlArray,endUrl];
             end

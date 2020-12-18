@@ -1,4 +1,4 @@
-classdef ActualQueryParameters < QueryParameters
+classdef ActualQueryParameters < QueryParametersWithFill
     %ActualQueryParameters Actual Query Paramaters DTO
     
     properties
@@ -7,7 +7,7 @@ classdef ActualQueryParameters < QueryParameters
     end
     
     methods        
-        function obj = ActualQueryParameters(ids,extractionRangeSelectionConfig,extractionRangeType,timezone,filterId, ...
+        function obj = ActualQueryParameters(ids,extractionRangeSelectionConfig,extractionRangeType,timezone,filterId,fillerConfig,fillerKindType, ...
                 granularity, transformId)
             
             if (nargin == 0)
@@ -16,11 +16,13 @@ classdef ActualQueryParameters < QueryParameters
                 extractionRangeType = [];
                 timezone = [];
                 filterId = [];
+                fillerConfig = [];
+                fillerKindType = [];
                 granularity = [];
                 transformId = [];
             end
             
-            obj@QueryParameters(ids, extractionRangeSelectionConfig, extractionRangeType,timezone,filterId);
+            obj@QueryParametersWithFill(ids, extractionRangeSelectionConfig, extractionRangeType,timezone,filterId,fillerConfig,fillerKindType);
             
             obj.Granularity = granularity;
             obj.TransformId = transformId;

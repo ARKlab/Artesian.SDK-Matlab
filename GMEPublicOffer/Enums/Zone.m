@@ -18,7 +18,8 @@ classdef Zone
         SICI,
         SLOV,
         SUD,
-        SVIZ
+        SVIZ,
+        CALA
     end
 
 end

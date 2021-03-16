@@ -15,7 +15,8 @@ classdef Market
         MB3,
         MB4,
         MB5,
-        MB6
+        MB6,
+        MRR
     end
 
 end

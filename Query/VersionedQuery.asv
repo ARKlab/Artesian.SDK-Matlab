@@ -40,17 +40,17 @@ classdef VersionedQuery < Query
                 obj.queryParamaters.VersionSelectionConfig.LastOf.DateStart = [];
                 obj.queryParamaters.VersionSelectionConfig.LastOf.DateEnd = [];
             
-            if(nargin == 0)                 
-                uff = char(vstart);
-                if nargin == 2
-                    obj.queryParamaters.VersionSelectionConfig.LastOf.Period = vstart;
-                elseif uff(1) == 'P'
-                    obj.queryParamaters.VersionSelectionConfig.LastOf.PeriodFrom = vstart;
-                    obj.queryParamaters.VersionSelectionConfig.LastOf.PeriodTo = vend;
-                else                
-                    obj.queryParamaters.VersionSelectionConfig.LastOf.DateStart = vstart;
-                    obj.queryParamaters.VersionSelectionConfig.LastOf.DateEnd = vend;
-                end
+            if(    
+                
+            uff = char(vstart);
+            if nargin == 2
+                obj.queryParamaters.VersionSelectionConfig.LastOf.Period = vstart;
+            elseif uff(1) == 'P'
+                obj.queryParamaters.VersionSelectionConfig.LastOf.PeriodFrom = vstart;
+                obj.queryParamaters.VersionSelectionConfig.LastOf.PeriodTo = vend;
+            else                
+                obj.queryParamaters.VersionSelectionConfig.LastOf.DateStart = vstart;
+                obj.queryParamaters.VersionSelectionConfig.LastOf.DateEnd = vend;
             end
         end
         function obj = ForLastOfDays(obj, vstart, vend)
@@ -170,10 +170,7 @@ classdef VersionedQuery < Query
                 end
             end
 
-            
-        end
-        
-        function subPath = buildMostRecentSubRoute(obj, queryParamaters)
+         function subPath = buildMostRecentSubRoute(obj, queryParamaters)
            
             if (~isempty(queryParamaters.VersionSelectionConfig.LastOf.DateStart) && ~isempty(queryParamaters.VersionSelectionConfig.LastOf.DateEnd))
                 subPath = "/" + obj.buildExtractionRangeVersionRoute(queryParamaters.VersionSelectionConfig.LastOf.DateStart, queryParamaters.VersionSelectionConfig.LastOf.DateEnd);
@@ -185,11 +182,10 @@ classdef VersionedQuery < Query
                     if (~isempty(queryParamaters.VersionSelectionConfig.LastOf.PeriodFrom) && ~isempty(queryParamaters.VersionSelectionConfig.LastOf.PeriodTo))
                     subPath = "/" + obj.buildExtractionRangeVersionRoute(queryParamaters.VersionSelectionConfig.LastOf.PeriodFrom,queryParamaters.VersionSelectionConfig.LastOf.PeriodTo);
                     else
-                        subPath = "";
+                        subPath = "/";
                     end
                 end
             end
-
             
         end
         

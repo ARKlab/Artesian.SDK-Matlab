@@ -4,6 +4,7 @@ classdef VersionSelectionTypeEnum < int32
         MUV (2),
         LastOfDays (3),
         LastOfMonths (4),
-        Version (5)
+        Version (5),
+        MostRecent (6)
     end
 end

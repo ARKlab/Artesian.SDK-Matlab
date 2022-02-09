@@ -162,12 +162,344 @@ mds = MarketDataService(cfg);
 
 ```
 
-To list MarketData curves
+### MarketData Acl
+
+#### AddRoles
 
 ```MATLAB
+mds.Acl.AddRoles(Acl("MatTest", TransformTypeEnum.SimpleShift, "1D", "1D","3D"))
+```
+
+#### RemoveRoles
+
+```MATLAB
+mds.Acl.RemoveRoles(Acl("MatTest", TransformTypeEnum.SimpleShift, "1D", "1D","3D"))
+```
+
+#### Get
+
+```MATLAB
+mds.Acl.GetRoles(
+  1, % page
+  10, % pageSize
+  {"test@ark-energy.eu"} % principalIds
+);
+
+mds.Acl.ReadRolesByPath(
+  "/system/marketdata/", % path
+);
+```
+
+### MarketData Admin
+
+#### Create
+
+```MATLAB
+mds.Admin.Create(
+  AuthGroup("Test group", {"test@ark-energy.eu", "test2@ark-energy.eu"})
+);
+```
+
+#### Update
+
+```MATLAB
+mds.Admin.Update(
+  1000, % groupId
+  AuthGroup("Test group", {"test@ark-energy.eu", "test2@ark-energy.eu"})
+);
+```
+
+#### Remove
+
+```MATLAB
+mds.Admin.Remove(
+  1000 % groupId
+);
+```
+
+#### Get
+
+```MATLAB
+mds.Admin.GetById(
+  1000 % groupId
+);
+
+mds.Admin.Get(
+  1, % page
+  10 % pageSize
+);
+
+mds.Admin.ReadUserPrincipals(
+  "test@ark-energy.eu"
+);
+```
+
+### MarketData ApiKey
+
+#### Create
+
+```MATLAB
+mds.ApiKey.Create(
+  ApiKey("2020-02-10T00:00:00Z", "Api key Description")
+);
+```
+
+#### Delete
+
+```MATLAB
+mds.ApiKey.Delete(
+  1000 % apiKeyId
+);
+```
+
+#### Get
+
+```MATLAB
+mds.ApiKey.GetById(
+  1000 % apiKeyId
+);
+
+mds.ApiKey.GetByUserId(
+  1, % page
+  10, % pageSize
+  "test@ark-energy.eu"
+);
+
+```
+
+### MarketData CustomFilter
+
+#### Create
+
+```MATLAB
+
+filter = {};
+filter.test = {"1"};
+filter.test2 = {"2"};
+mds.CustomFilter.Create(CustomFilter("test filter2","search test", filter))
+```
+
+#### Update
+
+```MATLAB
+filter = {};
+filter.type = {"VersionedTimeSerie"};
+filter.providerName = {"JAO"};
+
+mds.CustomFilter.Update(
+  1000, % filterId
+  CustomFilter("filter name", "search text", filter)
+);
+```
+
+#### Delete
+
+```MATLAB
+mds.CustomFilter.Delete(
+  1000 % filterId
+);
+```
+
+#### Get
+
+```MATLAB
+mds.CustomFilter.GetById(
+  1000 % filterId
+);
+
+mds.CustomFilter.Get(
+  1, % page
+  10 % pageSize
+);
+```
+
+### MarketData SearchFacet
+
+```MATLAB
+filter = {};
+filter.page = 1;
+filter.pageSize = 10;
+filter.searchText = "Search";
+filter.sorts = "MarketDataName asc";
+innerFilter = {}
+innerFilter.ProviderName = "JAO"
+filter.filters = innerFilter;
+
+mds.SearchFacet.Search(
+  filter
+);
+```
+
+### MarketData TimeTransform
+
+#### Create
+
+```MATLAB
+mds.TimeTransform.Create(TimeTransform("MatTest", TransformTypeEnum.SimpleShift, "1D", "1D","3D"))
+```
+
+#### Update
+
+```MATLAB
+mds.TimeTransform.Update(
+  1000, % timeTransformId
+  TimeTransform("MatTest", TransformTypeEnum.SimpleShift, "1D", "1D","3D")
+);
+```
+
+#### Delete
+
+```MATLAB
+mds.TimeTransform.Delete(
+  1000 % timeTransformId
+);
+```
+
+#### Get
+
+```MATLAB
+mds.TimeTransform.GetById(
+  1000 % timeTransformId
+);
+
+mds.TimeTransform.Get(
+  1, % page
+  10, % pageSize
+  true % userDefined
+);
+```
+
+### MarketData MarketDataRegistry
+
+#### Create
+
+```MATLAB
+data = MarketDataEntityInput("testMatlab", ...
+    "testmatlabcurveVer", ...
+    "Day", ...
+    "CET", ...
+    AggregationRuleEnum.Undefined, ...
+    MarketDataTypeEnum.ActualTimeSerie ...
+);
+
+mds.MarketData.Create(data);
+```
+
+#### Update
+
+```MATLAB
+data = MarketDataEntityInput("testMatlab", ...
+    "testmatlabcurveVer", ...
+    "Day", ...
+    "CET", ...
+    AggregationRuleEnum.Undefined, ...
+    MarketDataTypeEnum.ActualTimeSerie ...
+);
+data.MarketDataId = "100000001";
+
+mds.MarketData.Update(data);
+```
+
+#### Delete
+
+```MATLAB
+mds.MarketData.Delete(
+  100000001 % marketDataId
+);
+```
+
+#### Get
+
+```MATLAB
+mds.MarketData.GetById(
+  100000001 % marketDataId
+);
+
+mds.MarketData.GetByProviderName(
+  MarketDataIdentifier("Provider","CurveName")
+);
+
 page = 1;
 pageSize = 100;
-res = mds.ReadCurveRange(100000004, page, pageSize);
+res = mds.MarketData.ReadCurveRange(100000004, page, pageSize);
+```
+
+### MarketData UpsertCurve
+
+#### Upsert Actual
+
+```MATLAB
+rows = [];
+rows = [rows {{"2022-01-01T00:00:00", 1}}];
+rows = [rows {{"2022-01-02T00:00:00", 2}}];
+
+id = MarketDataIdentifier("ArkLab","ActualCurve");
+data = UpsertCurveDataActual(id, "CET", "2022-01-01T00:00:00Z", rows);
+mds.UpsertCurve.Upsert(data);
+```
+
+#### Upsert Versioned
+
+```MATLAB
+rows = [];
+rows = [rows {{"2022-01-01T00:00:00", 1}}];
+rows = [rows {{"2022-01-02T00:00:00", 2}}];
+
+id = MarketDataIdentifier("ArkLab","VersionedCurve");
+data = UpsertCurveDataVersioned(id, "2022-01-01T00:00:00","CET", "2022-01-01T00:00:00Z", rows);
+mds.UpsertCurve.Upsert(data);
+```
+
+#### Upsert MarketAssessment
+
+Market assessment product fields:
+
+- settlement
+- open
+- close
+- high
+- low
+- volumePaid
+- volumeGiven
+- volume
+
+```MATLAB
+rows = [];
+rows = [rows {{"2022-01-01T00:00:00" {{"Jan-22" {{"open" 6}, {"close" 7}}}}}}];
+
+id = MarketDataIdentifier("ArkLab","MarketAssessmentCurve");
+data = UpsertCurveDataMarketAssessment(id, "CET", "2022-01-01T00:00:00Z", rows);
+mds.UpsertCurve.Upsert(data);
+```
+
+#### Upsert BidAsk
+
+BidAsk product fields:
+
+- bestBidPrice
+- bestAskPrice
+- bestBidQuantity
+- bestAskQuantity
+- lastPrice
+- lastQuantity
+
+```MATLAB
+rows = [];
+rows = [rows {{"2022-01-01T00:00:00" {{"Jan-22" {{"bestBidPrice" 6}, {"bestBidQuantity" 7}}}}}}];
+
+id = MarketDataIdentifier("ArkLab","BidAskCurve");
+data = UpsertCurveDataBidAsk(id, "CET", "2022-01-01T00:00:00Z", rows);
+mds.UpsertCurve.Upsert(data);
+```
+
+#### Upsert Auction
+
+```MATLAB
+rows = [];
+rows = [rows {{"2022-01-01T00:00:00", AuctionBid("2022-01-01T00:00:00", {{1 1}}, {{2 2}})}}];
+
+id = MarketDataIdentifier("ArkLab", "AuctionCurve");
+data = UpsertCurveDataAuction(id, "CET", "2022-01-01T00:00:00Z", rows);
 ```
 
 ## GMEPublicOffer Service

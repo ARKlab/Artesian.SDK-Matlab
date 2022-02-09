@@ -1,36 +1,33 @@
 classdef MarketDataService
     %MarketDataService MarketDataService
-    
-    properties (Access = private)
-        cfg
-        client ClientArtesian
-        policy PolicyConfig = PolicyConfig()
-    end
-    
-    methods (Access = public)
-        function obj = MarketDataService(cfg)
-            obj.cfg = cfg;
-            obj.client = ClientArtesian(cfg, ArtesianConstants.MetadataVersion);
-        end
-        
-        function curveRange = ReadCurveRange(obj, id, page, pageSize, product, versionFrom, versionTo)
-            url= "/marketdata/entity";
-            if (nargin < 4)
-                error("id, page, pageSize are needed");
-            else
-                url = url + "/" + string(id) + "/" + "curves" + "?page=" + string(page) + "&pagesize=" + string(pageSize);
-            end
-            if (nargin >= 5 && ~isempty(product))
-                url = url + "&product=" + product;
-            end
-            if (nargin >= 7)
-                url = url + "&versionFrom=" + versionFrom;
-                url = url + "&versionTo=" + versionTo;
-            end
-            
-            curveRange=obj.client.Exec("GET",url);
-        end
-       
-    end
-end
 
+    properties (Access = public)
+        Acl
+        Admin
+        ApiKey
+        CustomFilter
+        MarketData
+        % Operations
+        SearchFacet
+        TimeTransform
+        UpsertCurve
+    end
+
+    methods (Access = public)
+
+        function obj = MarketDataService(cfg)
+            client = ClientArtesian(cfg, ArtesianConstants.MetadataVersion);
+            obj.Acl = MarketDataServiceAcl(client);
+            obj.Admin = MarketDataServiceAdmin(client);
+            obj.ApiKey = MarketDataServiceApiKey(client);
+            obj.CustomFilter = MarketDataServiceCustomFilter(client);
+            obj.MarketData = MarketDataServiceMarketData(client);
+            % obj.Operations = MarketDataServiceOperations(client);
+            obj.SearchFacet = MarketDataServiceSearchFacet(client);
+            obj.TimeTransform = MarketDataServiceTimeTransform(client);
+            obj.UpsertCurve = MarketDataServiceUpsertCurve(client);
+        end
+
+    end
+
+end

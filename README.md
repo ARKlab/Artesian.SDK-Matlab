@@ -167,13 +167,15 @@ mds = MarketDataService(cfg);
 #### AddRoles
 
 ```MATLAB
-mds.Acl.AddRoles(Acl("MatTest", TransformTypeEnum.SimpleShift, "1D", "1D","3D"))
+user = AclPrincipal(PrincipalTypeEnum.User, "test@ark-energy.eu");
+mds.Acl.AddRoles(Acl("/system/marketdata/", {AclRoles("Reader", user)}))
 ```
 
 #### RemoveRoles
 
 ```MATLAB
-mds.Acl.RemoveRoles(Acl("MatTest", TransformTypeEnum.SimpleShift, "1D", "1D","3D"))
+user = AclPrincipal(PrincipalTypeEnum.User, "test@ark-energy.eu");
+mds.Acl.RemoveRoles(Acl("/system/marketdata/", {AclRoles("Reader", user)}))
 ```
 
 #### Get

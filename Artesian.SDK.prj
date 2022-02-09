@@ -5,10 +5,10 @@
     <param.email>niccolo.cecchi@ark-energy.eu</param.email>
     <param.company>Ark Energy</param.company>
     <param.summary>This Library provides read access to the Artesian API</param.summary>
-    <param.description>In v1.3.3 has been added:
-- Added MostRecent to Versioned TS</param.description>
+    <param.description>In v1.4.0 has been added:
+- Added MarketData Service</param.description>
     <param.screenshot>${PROJECT_ROOT}\icon.png</param.screenshot>
-    <param.version>1.3.3</param.version>
+    <param.version>1.4.0</param.version>
     <param.output>${PROJECT_ROOT}\Artesian.SDK.mltbx</param.output>
     <param.products.name />
     <param.products.id />
@@ -47,6 +47,9 @@ icon.png
     <param.matlabpath.excludes />
     <param.javaclasspath.excludes />
     <param.exported.on.package>false</param.exported.on.package>
+    <param.required.addons />
+    <param.matlab.project.id />
+    <param.matlab.project.name />
     <param.release.start />
     <param.release.end />
     <param.release.current.only>false</param.release.current.only>
@@ -76,6 +79,9 @@ icon.png
       <param.matlabpath.excludes />
       <param.javaclasspath.excludes />
       <param.exported.on.package />
+      <param.required.addons />
+      <param.matlab.project.id />
+      <param.matlab.project.name />
       <param.release.start />
       <param.release.end />
       <param.release.current.only />
@@ -91,27 +97,18 @@ icon.png
       <param.additional.sw.linux.url />
     </unset>
     <fileset.rootdir>
-      <file>C:\Git\Artesian.SDK-Matlab</file>
+      <file>${PROJECT_ROOT}</file>
     </fileset.rootdir>
-    <fileset.rootfiles>
-      <file>${PROJECT_ROOT}\Client</file>
-      <file>${PROJECT_ROOT}\Configuration</file>
-      <file>${PROJECT_ROOT}\GMEPublicOffer</file>
-      <file>${PROJECT_ROOT}\LICENSE</file>
-      <file>${PROJECT_ROOT}\MarketData</file>
-      <file>${PROJECT_ROOT}\Query</file>
-      <file>${PROJECT_ROOT}\README.md</file>
-      <file>${PROJECT_ROOT}\Util</file>
-    </fileset.rootfiles>
+    <fileset.rootfiles />
     <fileset.depfun.included />
     <fileset.depfun.excluded />
     <fileset.package />
     <build-deliverables>
-      <file location="C:\Git\Artesian.SDK-Matlab" name="Artesian.SDK.mltbx" optional="false">C:\Git\Artesian.SDK-Matlab\Artesian.SDK.mltbx</file>
+      <file location="${PROJECT_ROOT}" name="Artesian.SDK.mltbx" optional="false">C:\Git\Artesian.SDK-Matlab\Artesian.SDK.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2018b</root>
+      <root>C:\Program Files\MATLAB\R2021b</root>
       <toolboxes />
     </matlab>
     <platform>

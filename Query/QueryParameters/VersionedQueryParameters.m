@@ -6,11 +6,12 @@ classdef VersionedQueryParameters < QueryParametersWithFill
         VersionSelectionType VersionSelectionTypeEnum
         Granularity
         TransformId
+        VersionLimit
     end
     
     methods
         function obj = VersionedQueryParameters(ids,extractionRangeSelectionConfig,extractionRangeType,timezone,filterId,fillerConfig,fillerKindType, ...
-                granularity, transformId, versionSelectionConfig, versionSelectionType)
+                granularity, transformId, versionSelectionConfig, versionSelectionType, versionLimit)
             if (nargin == 0)
                 ids = [];
                 extractionRangeSelectionConfig = [];
@@ -23,6 +24,7 @@ classdef VersionedQueryParameters < QueryParametersWithFill
                 transformId = [];
                 versionSelectionConfig = [];
                 versionSelectionType =[];
+                versionLimit = [];
             end
             
             obj@QueryParametersWithFill(ids, extractionRangeSelectionConfig, extractionRangeType,timezone,filterId,fillerConfig,fillerKindType);
@@ -31,6 +33,7 @@ classdef VersionedQueryParameters < QueryParametersWithFill
             obj.VersionSelectionType = versionSelectionType;
             obj.Granularity = granularity;
             obj.TransformId = transformId;
+            obj.VersionLimit = versionLimit;
         end
     end
 end

@@ -28,8 +28,13 @@ classdef VersionedQuery < Query
             obj.queryParamaters.VersionSelectionType = VersionSelectionTypeEnum.LastN;
             obj.queryParamaters.VersionSelectionConfig.LastN = lastN;
         end
-        function obj = ForMUV(obj)
+        function obj = ForMUV(obj, versionLimit)
             obj.queryParamaters.VersionSelectionType = VersionSelectionTypeEnum.MUV;
+            
+            if (nargin > 1)
+                obj.queryParamaters.VersionLimit = versionLimit;
+            end
+     
         end
         function obj = ForMostRecent(obj, vstart, vend)
             obj.queryParamaters.VersionSelectionType = VersionSelectionTypeEnum.MostRecent;
@@ -149,6 +154,9 @@ classdef VersionedQuery < Query
                     if(~isempty(qParam.FillerConfig.FillerPeriod) )
                         endUrl=endUrl+"&fillerP="+urlencode(string(qParam.FillerConfig.FillerPeriod));
                     end
+                end
+                if(~isempty(qParam.VersionLimit) )
+                    endUrl=endUrl+"&versionLimit="+urlencode(string(qParam.VersionLimit));
                 end
                 urlArray = [urlArray,endUrl];
             end

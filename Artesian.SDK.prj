@@ -5,10 +5,10 @@
     <param.email>niccolo.cecchi@ark-energy.eu</param.email>
     <param.company>Ark Energy</param.company>
     <param.summary>This Library provides read access to the Artesian API</param.summary>
-    <param.description>In v1.4.0 has been added:
-- Added MarketData Service</param.description>
+    <param.description>In v1.4.1 has been added:
+- VersionLimit on VersionedQuery (ForMUV method)</param.description>
     <param.screenshot>${PROJECT_ROOT}\icon.png</param.screenshot>
-    <param.version>1.4.0</param.version>
+    <param.version>1.4.1</param.version>
     <param.output>${PROJECT_ROOT}\Artesian.SDK.mltbx</param.output>
     <param.products.name />
     <param.products.id />
@@ -99,7 +99,16 @@ icon.png
     <fileset.rootdir>
       <file>${PROJECT_ROOT}</file>
     </fileset.rootdir>
-    <fileset.rootfiles />
+    <fileset.rootfiles>
+      <file>${PROJECT_ROOT}\Client</file>
+      <file>${PROJECT_ROOT}\Configuration</file>
+      <file>${PROJECT_ROOT}\GMEPublicOffer</file>
+      <file>${PROJECT_ROOT}\LICENSE</file>
+      <file>${PROJECT_ROOT}\MarketData</file>
+      <file>${PROJECT_ROOT}\Query</file>
+      <file>${PROJECT_ROOT}\README.md</file>
+      <file>${PROJECT_ROOT}\Util</file>
+    </fileset.rootfiles>
     <fileset.depfun.included />
     <fileset.depfun.excluded />
     <fileset.package />
@@ -108,7 +117,7 @@ icon.png
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2021b</root>
+      <root>C:\Program Files\MATLAB\R2022a</root>
       <toolboxes />
     </matlab>
     <platform>

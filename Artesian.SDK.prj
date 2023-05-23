@@ -5,10 +5,10 @@
     <param.email>niccolo.cecchi@ark-energy.eu</param.email>
     <param.company>Ark Energy</param.company>
     <param.summary>This Library provides read access to the Artesian API</param.summary>
-    <param.description>In v1.4.1 has been added:
-- VersionLimit on VersionedQuery (ForMUV method)</param.description>
+    <param.description>In v1.4.2 has been added:
+- Enum for GME Markets and Zones</param.description>
     <param.screenshot>${PROJECT_ROOT}\icon.png</param.screenshot>
-    <param.version>1.4.1</param.version>
+    <param.version>1.4.2</param.version>
     <param.output>${PROJECT_ROOT}\Artesian.SDK.mltbx</param.output>
     <param.products.name />
     <param.products.id />

@@ -19,7 +19,11 @@ classdef Zone
         SLOV,
         SUD,
         SVIZ,
-        CALA
+        CALA,
+        MONT,
+        XGRE,
+        XSVI,
+        BSP
     end
 
 end

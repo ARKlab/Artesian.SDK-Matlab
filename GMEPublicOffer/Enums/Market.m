@@ -20,7 +20,8 @@ classdef Market
         MB5,
         MB6,
         MBh,
-        MRR
+        MRR,
+        MIXBID
     end
 
 end

@@ -5,7 +5,7 @@ classdef (Abstract) ArtesianConstants
         QueryRoute = "query";
         MetadataVersion =  "v2.1";
         GMEPublicOfferRoute = "gmepublicoffer"
-        GMEPublicOfferVersion = "v1.0"
+        GMEPublicOfferVersion = "v2.0"
     end
     
 end

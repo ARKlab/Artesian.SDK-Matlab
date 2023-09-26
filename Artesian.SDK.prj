@@ -5,10 +5,10 @@
     <param.email>niccolo.cecchi@ark-energy.eu</param.email>
     <param.company>Ark Energy</param.company>
     <param.summary>This Library provides read access to the Artesian API</param.summary>
-    <param.description>In v1.4.2 has been added:
-- Enum for GME Markets and Zones</param.description>
+    <param.description>In v1.5.0 has been added:
+- XBID market and Public offer v2.0</param.description>
     <param.screenshot>${PROJECT_ROOT}\icon.png</param.screenshot>
-    <param.version>1.4.2</param.version>
+    <param.version>1.5.0</param.version>
     <param.output>${PROJECT_ROOT}\Artesian.SDK.mltbx</param.output>
     <param.products.name />
     <param.products.id />
@@ -117,7 +117,7 @@ icon.png
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2022a</root>
+      <root>C:\Program Files\MATLAB\R2023b</root>
       <toolboxes />
     </matlab>
     <platform>

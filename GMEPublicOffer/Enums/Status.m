@@ -6,7 +6,9 @@ classdef Status
         INC,
         REP,
         REV,
-        SUB
+        SUB,
+        COM,
+        PCOM
     end
 
 end

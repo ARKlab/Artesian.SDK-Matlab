@@ -11,6 +11,7 @@ classdef MarketDataService
         SearchFacet
         TimeTransform
         UpsertCurve
+        DeleteCurve
     end
 
     methods (Access = public)
@@ -26,6 +27,7 @@ classdef MarketDataService
             obj.SearchFacet = MarketDataServiceSearchFacet(client);
             obj.TimeTransform = MarketDataServiceTimeTransform(client);
             obj.UpsertCurve = MarketDataServiceUpsertCurve(client);
+            obj.DeleteCurve = MarketDataServiceDeleteCurve(client);
         end
 
     end

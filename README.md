@@ -504,6 +504,86 @@ id = MarketDataIdentifier("ArkLab", "AuctionCurve");
 data = UpsertCurveDataAuction(id, "CET", "2022-01-01T00:00:00Z", rows);
 ```
 
+### MarketData DeleteCurve
+
+#### Delete Actual
+
+```MATLAB
+id = MarketDataIdentifier("ArkLab","ActualCurve");
+data = DeleteCurveDataActual(id, "CET", "2022-01-01T00:00:00", "2022-01-02T00:00:00");
+mds.DeleteCurve.Delete(data);
+```
+To delete the whole range, just call the `DeleteCurveDataActual`, without date range
+
+```MATLAB
+id = MarketDataIdentifier("ArkLab","ActualCurve");
+data = DeleteCurveDataActual(id, "CET");
+mds.DeleteCurve.Delete(data);
+```
+
+#### Delete Versioned
+
+```MATLAB
+id = MarketDataIdentifier("ArkLab","VersionedCurve");
+data = DeleteCurveDataVersioned(id, "2022-01-01T00:00:00", "CET", "2022-01-01T00:00:00", "2022-01-02T00:00:00");
+mds.DeleteCurve.Delete(data);
+```
+To delete the whole range, just call the `DeleteCurveDataVersioned`, without date range
+
+```MATLAB
+id = MarketDataIdentifier("ArkLab","VersionedCurve");
+data = DeleteCurveDataVersioned(id, "2022-01-01T00:00:00", "CET");
+mds.DeleteCurve.Delete(data);
+```
+
+#### Delete MarketAssessment
+
+```MATLAB
+id = MarketDataIdentifier("ArkLab","MarketAssessmentCurve");
+product = {"Jan-22"};
+
+data = DeleteCurveDataMarketAssessment(id, "CET", product, "2022-01-01T00:00:00", "2022-01-02T00:00:00");
+mds.DeleteCurve.Delete(data);
+```
+To delete the whole range, just call the `DeleteCurveDataMarketAssessment`, without date range
+
+```MATLAB
+id = MarketDataIdentifier("ArkLab","MarketAssessmentCurve");
+data = DeleteCurveDataMarketAssessment(id, "CET", product);
+mds.DeleteCurve.Delete(data);
+```
+
+#### Delete BidAsk
+
+```MATLAB
+id = MarketDataIdentifier("ArkLab","BidAskCurve");
+product = {"Jan-22"};
+
+data = DeleteCurveDataBidAsk(id, "CET", product, "2022-01-01T00:00:00", "2022-01-02T00:00:00");
+mds.DeleteCurve.Delete(data);
+```
+To delete the whole range, just call the `DeleteCurveDataBidAsk`, without date range
+
+```MATLAB
+id = MarketDataIdentifier("ArkLab","BidAskCurve");
+data = DeleteCurveDataBidAsk(id, "CET", product);
+mds.DeleteCurve.Delete(data);
+```
+
+#### Delete Auction
+
+```MATLAB
+id = MarketDataIdentifier("ArkLab", "AuctionCurve");
+data = DeleteCurveDataAuction(id, "CET", "2022-01-01T00:00:00", "2022-01-02T00:00:00");
+```
+To delete the whole range, just call the `DeleteCurveDataAuction`, without date range
+
+```MATLAB
+id = MarketDataIdentifier("ArkLab","AuctionCurve");
+data = DeleteCurveDataAuction(id, "CET");
+mds.DeleteCurve.Delete(data);
+```
+
 ## GMEPublicOffer Service
 
 Using the ArtesianServiceConfig `cfg` we create an instance of the GMEPublicOfferService which is used to retrieve MarketData infos.

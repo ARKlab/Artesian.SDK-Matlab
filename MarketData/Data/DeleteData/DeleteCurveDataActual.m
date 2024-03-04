@@ -6,6 +6,8 @@ classdef DeleteCurveDataActual
         rangeStart
         rangeEnd
 
+        deferCommandExecution
+        deferDataGeneration
     end
 
     methods
@@ -20,6 +22,8 @@ classdef DeleteCurveDataActual
             obj.timezone = timezone;
             obj.rangeStart = rangeStart;
             obj.rangeEnd = rangeEnd;
+            obj.deferCommandExecution = true;
+            obj.deferDataGeneration = true;
         end
 
     end

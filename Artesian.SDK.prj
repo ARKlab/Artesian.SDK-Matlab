@@ -1,14 +1,14 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration build-checksum="406430653" file="C:\work\repos\Artesian.SDK-Matlab\Artesian.SDK.prj" location="C:\work\repos\Artesian.SDK-Matlab" name="Artesian.SDK" target="target.toolbox" target-name="Package Toolbox">
+  <configuration build-checksum="3866599018" file="C:\work\repos\Artesian.SDK-Matlab\Artesian.SDK.prj" location="C:\work\repos\Artesian.SDK-Matlab" name="Artesian.SDK" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>Artesian.SDK</param.appname>
     <param.authnamewatermark>Niccolo Cecchi</param.authnamewatermark>
     <param.email>niccolo.cecchi@ark-energy.eu</param.email>
     <param.company>Ark Energy</param.company>
     <param.summary>This Library provides read access to the Artesian API</param.summary>
-    <param.description>In v1.5.1 has been added:
-- Added Status enum to GmePublicOffer</param.description>
+    <param.description>In v1.6.0 has been added:
+- Added Delete Time Serie functionality</param.description>
     <param.screenshot>${PROJECT_ROOT}\icon.png</param.screenshot>
-    <param.version>1.5.1</param.version>
+    <param.version>1.6.0</param.version>
     <param.output>${PROJECT_ROOT}\Artesian.SDK.mltbx</param.output>
     <param.products.name />
     <param.products.id />
@@ -100,7 +100,6 @@ icon.png
       <file>${PROJECT_ROOT}</file>
     </fileset.rootdir>
     <fileset.rootfiles>
-      <file>${PROJECT_ROOT}\.vs</file>
       <file>${PROJECT_ROOT}\Client</file>
       <file>${PROJECT_ROOT}\Configuration</file>
       <file>${PROJECT_ROOT}\GMEPublicOffer</file>
@@ -118,7 +117,7 @@ icon.png
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2023b</root>
+      <root>C:\Program Files\MATLAB\R2022b</root>
       <toolboxes />
     </matlab>
     <platform>

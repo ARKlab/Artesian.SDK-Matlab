@@ -21,7 +21,8 @@ classdef Market
         MB6,
         MBh,
         MRR,
-        MIXBID
+        MIXBID,
+        AFRR
     end
 
 end

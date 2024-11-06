@@ -23,7 +23,9 @@ classdef Zone
         MONT,
         XGRE,
         XSVI,
-        BSP
+        BSP,
+        XAUS,
+        XFRA
     end
 
 end

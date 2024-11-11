@@ -5,10 +5,10 @@
     <param.email>niccolo.cecchi@ark-energy.eu</param.email>
     <param.company>Ark Energy</param.company>
     <param.summary>This Library provides read access to the Artesian API</param.summary>
-    <param.description>In v1.6.2 has been added:
+    <param.description>In v1.6.3 has been added:
 - Added XAUS and XFRA to GME public offer</param.description>
     <param.screenshot>${PROJECT_ROOT}\icon.png</param.screenshot>
-    <param.version>1.6.2</param.version>
+    <param.version>1.6.3</param.version>
     <param.output>${PROJECT_ROOT}\Artesian.SDK.mltbx</param.output>
     <param.products.name />
     <param.products.id />

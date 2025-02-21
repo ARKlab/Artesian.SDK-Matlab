@@ -8,7 +8,8 @@ classdef Status
         REV,
         SUB,
         COM,
-        PCOM
+        PCOM,
+        PREJ
     end
 
 end

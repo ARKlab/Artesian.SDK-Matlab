@@ -16,6 +16,11 @@ classdef GMEPublicOfferQuery
         generationType GenerationType
         page uint32
         pageSize uint32
+        granularity string
+        offerType string
+        blockId string
+        period uint32
+        minimumAcceptanteRatio double
     end
 
     methods
